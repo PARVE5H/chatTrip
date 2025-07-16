@@ -16,53 +16,54 @@ ChatTrip is a modern, feature-rich real-time chat application built with the MER
 ## 🚀 Live Preview & Screenshots
 
 ### 🌐 Live Demo
-> **Note**: Live preview link will be available after deployment
 
-- **Live Application**: [ChatTrip Live Demo](https://your-deployment-url.com)
-- **API Documentation**: [API Docs](https://your-deployment-url.com/api-docs)
+> 🚀 Deployed as a hobby project on Render (free tier), with minor server limitations like sleep after inactivity (15 minutes)
+
+- **Live Application**: [ChatTrip Live Demo](https://chattrip.onrender.com/)
+- **Hosted At**: _https://chattrip.onrender.com/_
 
 ### 📸 Application Screenshots
 
 #### 🏠 Homepage & Authentication
+
 <div align="center">
-  <img src="./screenshots/homepage.png" alt="Homepage" width="800"/>
+  
   <p><em>Homepage with Login/Signup</em></p>
 </div>
 
 <div align="center">
-  <img src="./screenshots/login.png" alt="Login Page" width="400"/>
-  <img src="./screenshots/signup-otp.png" alt="Signup with OTP" width="400"/>
+ 
   <p><em>Login Page & OTP Verification</em></p>
 </div>
 
 #### 💬 Chat Interface
+
 <div align="center">
-  <img src="./screenshots/chat-interface.png" alt="Chat Interface" width="800"/>
+ 
   <p><em>Main Chat Interface</em></p>
 </div>
 
 <div align="center">
-  <img src="./screenshots/group-chat.png" alt="Group Chat" width="400"/>
-  <img src="./screenshots/user-search.png" alt="User Search" width="400"/>
+  
   <p><em>Group Chat & User Search</em></p>
 </div>
 
 #### 🎨 Theme & Profile
+
 <div align="center">
-  <img src="./screenshots/dark-theme.png" alt="Dark Theme" width="400"/>
-  <img src="./screenshots/light-theme.png" alt="Light Theme" width="400"/>
+ 
   <p><em>Dark & Light Theme</em></p>
 </div>
 
 <div align="center">
-  <img src="./screenshots/profile-settings.png" alt="Profile Settings" width="600"/>
+ 
   <p><em>Profile Settings & Management</em></p>
 </div>
 
 #### 📱 Mobile Responsive
+
 <div align="center">
-  <img src="./screenshots/mobile-chat.png" alt="Mobile Chat" width="300"/>
-  <img src="./screenshots/mobile-groups.png" alt="Mobile Groups" width="300"/>
+  
   <p><em>Mobile Responsive Design</em></p>
 </div>
 
@@ -387,6 +388,7 @@ Headers: {
 ### 📊 Response Format
 
 **Success Response:**
+
 ```json
 {
   "success": true,
@@ -396,6 +398,7 @@ Headers: {
 ```
 
 **Error Response:**
+
 ```json
 {
   "success": false,
@@ -407,6 +410,7 @@ Headers: {
 ### 🚀 Socket.io Events
 
 **Client to Server:**
+
 - `setup` - User authentication setup
 - `join chat` - Join specific chat room
 - `leave chat` - Leave chat room
@@ -415,6 +419,7 @@ Headers: {
 - `stop typing` - Stop typing indicator
 
 **Server to Client:**
+
 - `connected` - Connection established
 - `message received` - New message received
 - `typing` - User is typing
@@ -457,7 +462,6 @@ Headers: {
 
 ### 🚀 Phase 1 (Next Release)
 
-- **Email OTP Verification**: Two-factor authentication
 - **Password Reset**: Secure password recovery
 - **Message Reactions**: React to messages with emojis
 - **Voice Messages**: Record and send voice notes
