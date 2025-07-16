@@ -239,26 +239,12 @@ const SignupWithOTP = () => {
               Email
               <Field.RequiredIndicator />
             </Field.Label>
-            <Group attached w={"full"} maxW={"100%"}>
-              <Input
-                flex={1}
-                type="email"
-                value={email}
-                placeholder="Enter a valid email address"
-                onChange={(e) => setEmail(e.target.value.toLowerCase())}
-              />
-              <Button
-                colorPalette="teal"
-                bgColor="#38b2ac"
-                onClick={submitHandler}
-                loading={loading}
-                disabled={!isEmailValid(email) || otpSent}
-                display={"flex"}
-                flexDirection={"column"}
-              >
-                Verify Email
-              </Button>
-            </Group>
+            <Input
+              type="email"
+              value={email}
+              placeholder="Enter a valid email address"
+              onChange={(e) => setEmail(e.target.value.toLowerCase())}
+            />
             <Field.HelperText color={"red"}>
               {email.length > 5 &&
                 !isEmailValid(email) &&
@@ -316,7 +302,7 @@ const SignupWithOTP = () => {
                 loading={verificationLoading}
                 disabled={!otp || otp.length !== 6}
               >
-                Verify & Register
+                Verify OTP & Register
               </Button>
 
               <Button
@@ -359,8 +345,17 @@ const SignupWithOTP = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </Field.Root>
-              <Button colorPalette="teal" bgColor="#38b2ac" disabled={!otpSent}>
-                Kindly Verify Email to Register
+              <Button
+                colorPalette="teal"
+                mb={3}
+                bgColor="#38b2ac"
+                onClick={submitHandler}
+                loading={loading}
+                disabled={!isEmailValid(email) || otpSent}
+                display={"flex"}
+                flexDirection={"column"}
+              >
+                Verify Email and Register
               </Button>
             </>
           )}
