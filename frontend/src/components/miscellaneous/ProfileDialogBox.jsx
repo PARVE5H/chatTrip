@@ -24,7 +24,6 @@ const ProfileDialogBox = ({ user, isOpen, onClose }) => {
   const [picLoading, setPicLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-
   // Use external state if provided, otherwise use internal state
   const dialogOpen = isOpen !== undefined ? isOpen : openDialog;
   const handleClose = onClose || (() => setOpenDialog(false));
@@ -335,6 +334,8 @@ const ProfileDialogBox = ({ user, isOpen, onClose }) => {
                       variant={"subtle"}
                       colorPalette="teal"
                       size="sm"
+                      loading={picLoading}
+                      disabled={picLoading}
                     >
                       <Check /> Save
                     </Button>
