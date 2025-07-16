@@ -27,9 +27,12 @@ ChatTrip is a modern, feature-rich real-time chat application built with the MER
 #### 🏠 Homepage & Authentication
 
 <div align="center">
-  
+  <img width="1920" height="1020" alt="Screenshot 2025-07-16 180246" src="https://github.com/user-attachments/assets/f4ea955a-a45f-43d1-b67d-5a9e761771cd" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 180432" src="https://github.com/user-attachments/assets/eea236ce-3e10-4ba6-bbfb-41b6fb1e75df" />
+
   <p><em>Homepage with Login/Signup</em></p>
 </div>
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 180444" src="https://github.com/user-attachments/assets/340a2b6a-993b-4d59-ac95-c9b7e3b44778" />
 
 <div align="center">
  
@@ -39,31 +42,68 @@ ChatTrip is a modern, feature-rich real-time chat application built with the MER
 #### 💬 Chat Interface
 
 <div align="center">
- 
+ <img width="1920" height="1020" alt="Screenshot 2025-07-16 180615" src="https://github.com/user-attachments/assets/41aeed8e-45c7-43c6-95e2-946a123e0a2d" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 180607" src="https://github.com/user-attachments/assets/02552805-dda7-4e55-a855-9cc1a1384847" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 181228" src="https://github.com/user-attachments/assets/d818793e-c285-436d-875e-c1560d8e0917" />
+<img width="960" height="1020" alt="Screenshot 2025-07-16 181941" src="https://github.com/user-attachments/assets/7ab7cc22-f942-4a6e-ac1b-e9b8f34c855f" />
+<img width="960" height="1020" alt="Screenshot 2025-07-16 182003" src="https://github.com/user-attachments/assets/543cb7a6-d26c-4e12-9b7c-fa6c17ee07b2" />
+
   <p><em>Main Chat Interface</em></p>
 </div>
 
 <div align="center">
-  
+  <img width="1920" height="1020" alt="Screenshot 2025-07-16 182013" src="https://github.com/user-attachments/assets/36222856-571f-45ee-a202-9b6d2f96dc89" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 182058" src="https://github.com/user-attachments/assets/c831daea-3113-458f-8731-2c8d65ba38de" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 182114" src="https://github.com/user-attachments/assets/c50255b6-1c81-4b9d-9167-dac466b29255" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 183419" src="https://github.com/user-attachments/assets/60ec30e2-e39d-4f80-afd1-da408937a662" />
+  <img width="1920" height="1020" alt="Screenshot 2025-07-16 183541" src="https://github.com/user-attachments/assets/63edf637-e674-4aa7-a894-e2d117832dc0" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 183621" src="https://github.com/user-attachments/assets/d44b094a-7253-4d85-9ef0-60a58af6be56" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 183626" src="https://github.com/user-attachments/assets/f269fa34-3763-4f19-a6b5-6b59abb65ae2" />
+
   <p><em>Group Chat & User Search</em></p>
 </div>
 
 #### 🎨 Theme & Profile
 
 <div align="center">
- 
+ <img width="1920" height="1020" alt="Screenshot 2025-07-16 180221" src="https://github.com/user-attachments/assets/f177c577-966a-42d3-b4b0-8219e3beaf43" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 180233" src="https://github.com/user-attachments/assets/4ce90381-9331-4927-a14c-40252fbda775" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 180620" src="https://github.com/user-attachments/assets/6db96a81-cf0e-450d-9edd-f4b2221e32de" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 180634" src="https://github.com/user-attachments/assets/1235cd86-bfd1-409a-ae60-b7a74d9a8957" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 181026" src="https://github.com/user-attachments/assets/9a86a995-804e-4a8b-b455-068cc24e9374" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 181033" src="https://github.com/user-attachments/assets/23a759d8-5b58-4548-b3c4-d5ee1288fd04" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 181242" src="https://github.com/user-attachments/assets/1eb8324c-b1e5-4d68-8086-8bf68d26ab4b" />
+<img width="1918" height="1013" alt="Screenshot 2025-07-16 181557" src="https://github.com/user-attachments/assets/e9385280-eddf-4a1a-9b00-f54d33efa068" />
+<img width="960" height="1020" alt="Screenshot 2025-07-16 181944" src="https://github.com/user-attachments/assets/cde039bd-00d0-4d04-9463-b0d27a408271" />
+
   <p><em>Dark & Light Theme</em></p>
 </div>
 
 <div align="center">
- 
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 180825" src="https://github.com/user-attachments/assets/f58dfa3c-17d3-460a-ad23-c3ca4164eeab" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 180840" src="https://git
+hub.com/user-attachments/assets/c19f33d9-b4d3-4d61-9bf0-8312729706fa" />
+  <img width="1920" height="1020" alt="Screenshot 2025-07-16 181003" src="https://github.com/user-attachments/assets/dbcd23d9-dbe8-4e38-8e63-4ef8fd25904f" />
+<img width="1920" height="1020" alt="Screenshot 2025-07-16 181011" src="https://github.com/user-attachments/assets/f0350b4c-b94e-4133-8efd-cf84d420fa9e" />
+
   <p><em>Profile Settings & Management</em></p>
 </div>
 
 #### 📱 Mobile Responsive
 
-<div align="center">
+<div align="center" display="flex" flexDirection="column" gap="4px">
   
+![WhatsApp Image 2025-07-16 at 7 08 18 PM](https://github.com/user-attachments/assets/c698f614-64ec-43ec-a9e4-eb6854eb838f)
+![WhatsApp Image 2025-07-16 at 7 08 19 PM](https://github.com/user-attachments/assets/72b9d8ac-ccea-4aa4-8930-2c836093cd3d)![WhatsApp Image 2025-07-16 at 7 08 19 PM (1)](https://github.com/user-attachments/assets/51025f9b-2030-4ff3-a09d-3fca6c5a13d6)
+![Screenshot_20250716_184936_Brave](https://github.com/user-attachments/assets/27352dd0-030a-46cf-b883-6dda88c404f1)
+![Screenshot_20250716_184942_Brave](https://github.com/user-attachments/assets/ba05faa0-8480-490b-8c60-deaafd628482)
+![Screenshot_20250716_184946_Brave](https://github.com/user-attachments/assets/5118ef31-bef5-470c-8413-a1feda76a8f7)
+![Screenshot_20250716_184956_Brave](https://github.com/user-attachments/assets/ff5de013-4abb-4b76-abfc-6a08c134bf2d)
+  ![Screenshot_20250716_185037_Brave](https://github.com/user-attachments/assets/a1ceff6b-827b-424e-9dc4-5ab942942431)
+![Screenshot_20250716_185027_Brave](https://github.com/user-attachments/assets/a3d5d625-db2a-43e1-9d5a-a4f5a572e18a)
+![Screenshot_20250716_185042_Brave](https://github.com/user-attachments/assets/fbaff9db-3ac8-4ff0-880b-5ec45863c174)
+![Screenshot_20250716_185048_Brave](https://github.com/user-attachments/assets/1d2314e1-69d0-48cf-86b6-34d48437a0f0)
+
   <p><em>Mobile Responsive Design</em></p>
 </div>
 
