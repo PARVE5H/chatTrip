@@ -13,18 +13,72 @@
 
 ChatTrip is a modern, feature-rich real-time chat application built with the MERN stack (MongoDB, Express.js, React, Node.js) and Socket.io. It provides a seamless communication experience with advanced features like group chats, real-time messaging, file sharing, and much more.
 
+## 🚀 Live Preview & Screenshots
+
+### 🌐 Live Demo
+> **Note**: Live preview link will be available after deployment
+
+- **Live Application**: [ChatTrip Live Demo](https://your-deployment-url.com)
+- **API Documentation**: [API Docs](https://your-deployment-url.com/api-docs)
+
+### 📸 Application Screenshots
+
+#### 🏠 Homepage & Authentication
+<div align="center">
+  <img src="./screenshots/homepage.png" alt="Homepage" width="800"/>
+  <p><em>Homepage with Login/Signup</em></p>
+</div>
+
+<div align="center">
+  <img src="./screenshots/login.png" alt="Login Page" width="400"/>
+  <img src="./screenshots/signup-otp.png" alt="Signup with OTP" width="400"/>
+  <p><em>Login Page & OTP Verification</em></p>
+</div>
+
+#### 💬 Chat Interface
+<div align="center">
+  <img src="./screenshots/chat-interface.png" alt="Chat Interface" width="800"/>
+  <p><em>Main Chat Interface</em></p>
+</div>
+
+<div align="center">
+  <img src="./screenshots/group-chat.png" alt="Group Chat" width="400"/>
+  <img src="./screenshots/user-search.png" alt="User Search" width="400"/>
+  <p><em>Group Chat & User Search</em></p>
+</div>
+
+#### 🎨 Theme & Profile
+<div align="center">
+  <img src="./screenshots/dark-theme.png" alt="Dark Theme" width="400"/>
+  <img src="./screenshots/light-theme.png" alt="Light Theme" width="400"/>
+  <p><em>Dark & Light Theme</em></p>
+</div>
+
+<div align="center">
+  <img src="./screenshots/profile-settings.png" alt="Profile Settings" width="600"/>
+  <p><em>Profile Settings & Management</em></p>
+</div>
+
+#### 📱 Mobile Responsive
+<div align="center">
+  <img src="./screenshots/mobile-chat.png" alt="Mobile Chat" width="300"/>
+  <img src="./screenshots/mobile-groups.png" alt="Mobile Groups" width="300"/>
+  <p><em>Mobile Responsive Design</em></p>
+</div>
+
 ## ✨ Key Features
 
 ### 🔐 Authentication & Security
 
 - **JWT Authentication**: Secure token-based authentication system
-- **Email OTP Verification**: Two-factor authentication via email
+- **Email OTP Verification**: Two-factor authentication via email with resend functionality
 - **Password Encryption**: BCrypt hashing for secure password storage
 - **Protected Routes**: Middleware-based route protection
 - **Session Management**: Automatic token refresh and session handling
 - **Rate Limiting**: Protection against spam and abuse
 - **Input Validation**: Comprehensive server-side validation
 - **Security Headers**: XSS protection, CORS, and security headers
+- **Email Configuration**: Secure email service integration
 
 ### 👤 User Management
 
@@ -153,7 +207,7 @@ ChatTrip is a modern, feature-rich real-time chat application built with the MER
 
    # Database Configuration
    MONGODB_URI=mongodb+srv://username:password@cluster0.mongodb.net
-   DB_NAME=chattrip
+   DB_NAME=your_db_name
 
    # JWT Configuration
    JWT_SECRET=your_jwt_secret_key
@@ -207,12 +261,14 @@ chattrip/
 ├── backend/
 │   ├── config/
 │   │   ├── db.js                 # Database configuration
-│   │   ├── cloudinary.js         # Cloudinary setup
+│   │   ├── cloudinary.js         # Cloudinary setup & upload functions
+│   │   ├── emailConfig.js        # Email service configuration
 │   │   └── generateToken.js      # JWT token generation
 │   ├── controllers/
 │   │   ├── userControllers.js    # User management logic
 │   │   ├── chatControllers.js    # Chat management logic
-│   │   └── messageControllers.js # Message handling logic
+│   │   ├── messageControllers.js # Message handling logic
+│   │   └── otpController.js      # OTP verification logic
 │   ├── middlewares/
 │   │   ├── authMiddlewares.js    # Authentication middleware
 │   │   ├── errorMiddlewares.js   # Error handling middleware
@@ -220,13 +276,15 @@ chattrip/
 │   ├── models/
 │   │   ├── userModel.js          # User schema
 │   │   ├── chatModel.js          # Chat schema
-│   │   └── messageModel.js       # Message schema
+│   │   ├── messageModel.js       # Message schema
+│   │   └── otpModel.js           # OTP verification schema
 │   ├── routes/
 │   │   ├── userRoutes.js         # User API routes
 │   │   ├── chatRoutes.js         # Chat API routes
 │   │   ├── messageRoutes.js      # Message API routes
-│   │   └── uploadRoutes.js       # File upload routes
-│   └── server.js                 # Main server file
+│   │   ├── uploadRoutes.js       # File upload routes
+│   │   └── otpRoutes.js          # OTP verification routes
+│   └── server.js                 # Main server file with Socket.io
 ├── frontend/
 │   ├── public/
 │   │   ├── index.html            # HTML template
@@ -235,16 +293,29 @@ chattrip/
 │   │   ├── components/
 │   │   │   ├── Authentication/
 │   │   │   │   ├── Login.js      # Login component
-│   │   │   │   └── Signup.js     # Registration component
+│   │   │   │   └── SignupWithOTP.js # Registration with OTP
 │   │   │   ├── miscellaneous/
 │   │   │   │   ├── Header.jsx    # Navigation header
 │   │   │   │   ├── MyChats.jsx   # Chat list component
 │   │   │   │   ├── ChatBox.jsx   # Main chat interface
+│   │   │   │   ├── WelcomeChatBox.jsx # Welcome screen
 │   │   │   │   ├── SingleChat.jsx # Individual chat view
+│   │   │   │   ├── ScrollableChat.jsx # Message display
+│   │   │   │   ├── ChatLoading.jsx # Loading states
 │   │   │   │   ├── ProfileDialogBox.jsx # User profile modal
 │   │   │   │   ├── SideDrawer.jsx # User search drawer
-│   │   │   │   └── CreateGroupChatDialogBox.jsx # Group creation
+│   │   │   │   ├── CreateGroupChatDialogBox.jsx # Group creation
+│   │   │   │   ├── UpdateGroupChatDialogBox.jsx # Group management
+│   │   │   │   ├── UserListItem.jsx # User list component
+│   │   │   │   ├── UserBadgeItem.jsx # User badge component
+│   │   │   │   ├── EmptyMyChatsList.jsx # Empty state component
+│   │   │   │   └── styles.css    # Component styles
 │   │   │   └── ui/               # Reusable UI components
+│   │   │       ├── color-mode.jsx # Theme toggle
+│   │   │       ├── password-input.jsx # Password input
+│   │   │       ├── provider.jsx  # UI provider
+│   │   │       ├── toaster.jsx   # Toast notifications
+│   │   │       └── tooltip.jsx   # Tooltip component
 │   │   ├── context/
 │   │   │   └── ChatProvider.js   # Global state management
 │   │   ├── Pages/
@@ -253,40 +324,106 @@ chattrip/
 │   │   ├── config/
 │   │   │   └── ChatLogic.js      # Chat utility functions
 │   │   ├── assets/               # Static assets
+│   │   │   ├── logo.png          # Application logo
+│   │   │   ├── darkBackground.png # Dark theme background
+│   │   │   ├── lightBackground.png # Light theme background
+│   │   │   └── TypingIndicator.json # Lottie animation
 │   │   ├── App.js                # Main app component
-│   │   └── index.js              # React entry point
+│   │   ├── App.css               # Global styles
+│   │   ├── index.js              # React entry point
+│   │   └── index.css             # Base styles
 ├── .env                          # Environment variables
+├── .gitignore                    # Git ignore file
 ├── package.json                  # Dependencies and scripts
+├── package-lock.json             # Lock file
 └── README.md                     # Project documentation
 ```
 
 ## 🔧 API Endpoints
 
-### Authentication
+### 🔐 Authentication
 
-- `POST /api/user/` - Register new user
-- `POST /api/user/login` - User login
-- `PUT /api/user/profile` - Update user profile
-- `GET /api/user?search=` - Search users
+- `POST /api/user/` - Register new user (traditional method)
+- `POST /api/user/login` - User login authentication
+- `PUT /api/user/profile` - Update user profile (name, avatar)
+- `GET /api/user?search=` - Search users by name/email
 
-### Chat Management
+### 📧 OTP Verification
 
-- `GET /api/chat/` - Get user's chats
+- `POST /api/otp/send-registration-otp` - Send OTP for registration
+- `POST /api/otp/verify-otp` - Verify OTP and complete registration
+- `POST /api/otp/resend-otp` - Resend OTP to user email
+
+### 💬 Chat Management
+
+- `GET /api/chat/` - Get user's chats with pagination
 - `POST /api/chat/` - Create/access one-on-one chat
 - `POST /api/chat/group` - Create group chat
-- `PUT /api/chat/rename` - Rename group chat
+- `PUT /api/chat/renamegroup` - Rename group chat
 - `PUT /api/chat/groupadd` - Add user to group
 - `PUT /api/chat/groupremove` - Remove user from group
 
-### Messages
+### 📨 Messages
 
-- `GET /api/message/:chatId` - Get all messages in chat
-- `POST /api/message/` - Send new message
+- `GET /api/message/:chatId` - Get all messages in specific chat
+- `POST /api/message/` - Send new message to chat
 
-### File Upload
+### 📁 File Upload
 
-- `POST /api/upload/image` - Upload image file
-- `POST /api/upload/signature` - Generate upload signature
+- `POST /api/upload/image` - Upload image file with transformations
+- `POST /api/upload/signature` - Generate secure upload signature
+
+### 🔒 Protected Routes
+
+All routes except authentication and OTP verification require JWT token:
+
+```javascript
+Headers: {
+  'Authorization': 'Bearer <jwt_token>',
+  'Content-Type': 'application/json'
+}
+```
+
+### 📊 Response Format
+
+**Success Response:**
+```json
+{
+  "success": true,
+  "message": "Operation successful",
+  "data": {}
+}
+```
+
+**Error Response:**
+```json
+{
+  "success": false,
+  "message": "Error description",
+  "error": "Detailed error info"
+}
+```
+
+### 🚀 Socket.io Events
+
+**Client to Server:**
+- `setup` - User authentication setup
+- `join chat` - Join specific chat room
+- `leave chat` - Leave chat room
+- `new message` - Send new message
+- `typing` - Start typing indicator
+- `stop typing` - Stop typing indicator
+
+**Server to Client:**
+- `connected` - Connection established
+- `message received` - New message received
+- `typing` - User is typing
+- `stop typing` - User stopped typing
+- `group created` - New group created
+- `member added` - Member added to group
+- `member removed` - Member removed from group
+- `group deleted` - Group deleted
+- `group renamed` - Group renamed
 
 ## 🎯 Usage Guide
 

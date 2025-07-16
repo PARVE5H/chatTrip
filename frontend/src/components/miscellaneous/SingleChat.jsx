@@ -19,11 +19,10 @@ import axios from "axios";
 import { toaster } from "../ui/toaster";
 import "./styles.css";
 import ScrollableChat from "./ScrollableChat";
-import io from "socket.io-client";
+import { connectSocket } from "../../context/ChatProvider";
 import Lottie from "react-lottie";
 import animationData from "../../assets/TypingIndicator.json";
 
-const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -57,8 +56,23 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       return;
     }
 
-    socket = io(ENDPOINT);
-    socket.emit("setup", user);
+    // Use the optimized socket connection
+    socket = connectSocket(
+      user,
+      () => {
+        setSocketConnected(true);
+        // Rejoin current chat if exists
+        if (selectedChat && selectedChat._id) {
+          socket.emit("join chat", selectedChat._id);
+        }
+      },
+      (reason) => {
+        console.log('Socket disconnected:', reason);
+        setSocketConnected(false);
+        setIsTyping(false);
+      }
+    );
+    
     socket.on("connected", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
     socket.on("stop typing", () => setIsTyping(false));
@@ -82,7 +96,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         socket.disconnect();
       }
     };
-  }, [user]);
+  }, [user, selectedChat]);
 
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
@@ -112,8 +126,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       );
       socket.emit("new message", data);
       setMessages([...messages, data]);
+      
       // Trigger MyChats to reload and show updated chat order
       setFetchAgain(!fetchAgain);
+      
+      // Force reconnection if socket seems disconnected
+      if (!socketConnected) {
+        console.log('Socket disconnected, attempting to reconnect...');
+        setTimeout(() => {
+          if (socket && user) {
+            socket.emit('setup', user);
+          }
+        }, 1000);
+      }
     } catch (error) {
       toaster.create({
         title: "Error Occurred!",

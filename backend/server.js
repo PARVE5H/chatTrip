@@ -11,6 +11,7 @@ import otpRoutes from "./routes/otpRoutes.js";
 import { Server } from "socket.io";
 import path from "path";
 import { setSocketInstance } from "./controllers/chatControllers.js";
+import keepAlive from "./config/keepAlive.js";
 
 // Load environment variables FIRST
 dotenv.config();
@@ -54,6 +55,14 @@ app.use("/api/message", messageRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/otp", otpRoutes);
 
+// Keep-alive route for Render free tier
+app.get("/api/keep-alive", (req, res) => {
+  res.status(200).json({ 
+    message: "Server is alive", 
+    timestamp: new Date().toISOString() 
+  });
+});
+
 // --------------------------Deployment ------------------------------------------------------
 
 const __dirname1 = path.resolve();
@@ -77,12 +86,29 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, console.log(`Server Started on PORT ${PORT}`));
 
+// Initialize keep-alive service for production
+if (process.env.NODE_ENV === "production") {
+  keepAlive();
+  console.log("Keep-alive service started for production");
+}
+
 const io = new Server(server, {
   pingTimeout: 60000,
+  pingInterval: 25000,
+  transports: ['websocket', 'polling'],
+  allowEIO3: true,
+  connectTimeout: 45000,
+  // Optimize for Render's limitations
+  upgradeTimeout: 30000,
+  maxHttpBufferSize: 1e6,
+  // CORS for static binding (same domain)
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.NODE_ENV === "production" 
+      ? true // Allow same-origin requests
+      : "http://localhost:3000",
     methods: ["GET", "POST"],
-  },
+    credentials: true
+  }
 });
 
 // Track which users are in which chat rooms
