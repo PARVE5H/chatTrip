@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans,wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  background-image: url("./assets/lightBackground.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Dark mode via class-based switching */
+.dark .App {
+  background-image: url("./assets/darkBackground.png");
+}
+
+/* Explicitly set light mode to override system preference */
+.light .App {
+  background-image: url("./assets/lightBackground.png") !important;
+}
+
+/* Fallback for system preference (lower priority) */
+@media (prefers-color-scheme: dark) {
+  .App {
+    background-image: url("./assets/darkBackground.png");
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(135, 136, 136, 0.281);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

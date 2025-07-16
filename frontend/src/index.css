@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Work sans", "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Work sans", source-code-pro, Menlo, Monaco, Consolas,
+    "Courier New", monospace;
+}
+
+.theme-box {
+  background-color: #f7fafc !important;
+}
+
+/* Dark mode via class-based switching */
+.dark .theme-box {
+  background-color: #0f1015 !important;
+}
+
+/* Explicitly set light mode to override system preference */
+.light .theme-box {
+  background-color: #f7fafc !important;
+}
+
+.hover-style :hover {
+  background-color: #d4f0ee;
+}
+.MySelectedChat {
+  background-color: #38b2ac;
+  color: #f7fafc;
+}
+.UnselectedChats {
+  background-color: #dbdbdb;
+  color: #000000;
+}
+
+.dark .UnselectedChats {
+  background-color: #444343 !important;
+  color: #ffffff !important;
+}
+
+.dark .hover-style :hover {
+  background-color: #171923;
+}
+
+/* Explicitly set light mode to override system preference */
+.light .UnselectedChats {
+  background-color: #dbdbdb !important;
+  color: #000000 !important;
+}
+
+.light .hover-style :hover {
+  background-color: #d4f0ee !important;
+}
+
+/* Fallback for system preference (lower priority) */
+@media (prefers-color-scheme: dark) {
+  .theme-box {
+    background-color: #0f1015 !important;
+  }
+  .UnselectedChats {
+    background-color: #444343 !important;
+    color: #ffffff !important;
+  }
+  .hover-style :hover {
+    background-color: #171923;
+  }
+}
+/* 
+@media (prefers-color-scheme: dark) {
+  .chat-box {
+    color: #f7fafc !important;
+    background-color: #374151 !important;
+  }
+} */
