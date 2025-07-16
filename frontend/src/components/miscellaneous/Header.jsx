@@ -143,7 +143,7 @@ const Header = () => {
             <Menu.Trigger>
               <Avatar.Root cursor={"pointer"} padding={0} size="sm" m={1}>
                 <Avatar.Image src={user?.avatar} />
-                <Avatar.Fallback name={user?.name?.charAt(0)} />
+                <Avatar.Fallback name={user?.name} />
               </Avatar.Root>
             </Menu.Trigger>
             <Portal>
