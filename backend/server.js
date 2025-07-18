@@ -153,6 +153,10 @@ io.on("connection", (socket) => {
       return console.log("Chat.users not defined");
     }
 
+    // First, emit to the chat room for users who are currently in the chat
+    socket.in(chat._id).emit("message received", newMessageReceived);
+
+    // Then, send notifications to users who are NOT currently in this chat room
     chat.users.forEach((user) => {
       if (user._id === newMessageReceived.sender._id) return;
 
@@ -162,9 +166,6 @@ io.on("connection", (socket) => {
       // Only send notification if user is NOT currently in this chat room
       if (userActiveRoom !== chat._id) {
         socket.in(user._id).emit("message received", newMessageReceived);
-      } else {
-        // If user is in the chat room, send the message directly to the room
-        socket.in(chat._id).emit("message received", newMessageReceived);
       }
     });
   });
