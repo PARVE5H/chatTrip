@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Box,
   Button,
@@ -27,6 +27,43 @@ const SideDrawer = ({ user, isOpen, onClose }) => {
   const drawerOpen = isOpen !== undefined ? isOpen : openSideDrawer;
   const handleClose = onClose || (() => setOpenSideDrawer(false));
 
+  const handleSearch = useCallback(
+    async (triggeredBy) => {
+      if (triggeredBy === "onClick" && !search) {
+        toaster.create({
+          title: "Invalid Input",
+          description: "Please enter something in search",
+          type: "warning",
+          duration: 3000,
+          closable: true,
+          placement: "top-left",
+        });
+        return;
+      }
+      try {
+        setLoading(true);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        };
+
+        const { data } = await axios.get(`/api/user?search=${search}`, config);
+        setLoading(false);
+        setSearchResult(data);
+      } catch (error) {
+        toaster.create({
+          title: "Error Occured!",
+          description: "Failed to load the search results",
+          type: "error",
+          duration: 3000,
+          closable: true,
+        });
+      }
+    },
+    [search, user],
+  );
+
   // Debounced search effect
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -38,41 +75,7 @@ const SideDrawer = ({ user, isOpen, onClose }) => {
     }, 300); // 300ms delay
 
     return () => clearTimeout(timeoutId);
-  }, [search, user]);
-
-  const handleSearch = async (triggeredBy) => {
-    if (triggeredBy === "onClick" && !search) {
-      toaster.create({
-        title: "Invalid Input",
-        description: "Please enter something in search",
-        type: "warning",
-        duration: 3000,
-        closable: true,
-        placement: "top-left",
-      });
-      return;
-    }
-    try {
-      setLoading(true);
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
-
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
-      setLoading(false);
-      setSearchResult(data);
-    } catch (error) {
-      toaster.create({
-        title: "Error Occured!",
-        description: "Failed to load the search results",
-        type: "error",
-        duration: 3000,
-        closable: true,
-      });
-    }
-  };
+  }, [search, handleSearch]);
 
   const accessChat = async (userId) => {
     try {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Field,
   Fieldset,
@@ -35,21 +35,7 @@ const UpdateGroupChatDialogBox = ({
   const dialogOpen = isOpen !== undefined ? isOpen : openDialog;
   const handleClose = onClose || (() => setOpenDialog(false));
 
-  // Debounced search effect - automatically searches when search state changes
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (search.trim()) {
-        handleSearch();
-      } else {
-        // Clear search results when search is empty (handles backspace to empty state)
-        setSearchResult([]);
-      }
-    }, 300); // 300ms delay
-
-    return () => clearTimeout(timeoutId);
-  }, [search, user]);
-
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     if (!search.trim()) {
       setSearchResult([]);
       return;
@@ -75,7 +61,21 @@ const UpdateGroupChatDialogBox = ({
       });
       setLoading(false);
     }
-  };
+  }, [search, user]);
+
+  // Debounced search effect - automatically searches when search state changes
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (search.trim()) {
+        handleSearch();
+      } else {
+        // Clear search results when search is empty (handles backspace to empty state)
+        setSearchResult([]);
+      }
+    }, 300); // 300ms delay
+
+    return () => clearTimeout(timeoutId);
+  }, [search, handleSearch]);
 
   const handleAddUser = async (user1) => {
     if (selectedChat.users.find((u) => u._id === user1._id)) {
@@ -111,7 +111,7 @@ const UpdateGroupChatDialogBox = ({
           chatId: selectedChat._id,
           userId: user1._id,
         },
-        config
+        config,
       );
 
       setSelectedChat(data);
@@ -176,7 +176,7 @@ const UpdateGroupChatDialogBox = ({
             chatId: selectedChat._id,
             userId: user1._id,
           },
-          config
+          config,
         );
 
         // Clear selectedChat to avoid errors and close dialog
@@ -222,7 +222,7 @@ const UpdateGroupChatDialogBox = ({
           chatId: selectedChat._id,
           userId: user1._id,
         },
-        config
+        config,
       );
       toaster.create({
         title: "Member removed from the group",
@@ -281,7 +281,7 @@ const UpdateGroupChatDialogBox = ({
           chatId: selectedChat._id,
           chatName: groupChatName,
         },
-        config
+        config,
       );
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);

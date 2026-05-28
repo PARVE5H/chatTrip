@@ -1,12 +1,4 @@
-import {
-  Button,
-  Field,
-  Fieldset,
-  Input,
-  VStack,
-  Box,
-  Text,
-} from "@chakra-ui/react";
+import { Button, Field, Fieldset, Input, VStack, Box } from "@chakra-ui/react";
 import { Toaster, toaster } from "../ui/toaster";
 import { PasswordInput } from "../ui/password-input";
 import { useState } from "react";
@@ -144,7 +136,7 @@ const SignupWithOTP = () => {
       const { data } = await axios.post(
         "/api/otp/verify-otp",
         { email, otp },
-        config
+        config,
       );
 
       toaster.create({

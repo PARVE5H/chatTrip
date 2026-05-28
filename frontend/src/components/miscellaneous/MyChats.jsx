@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ChatState } from "../../context/ChatProvider";
 import axios from "axios";
 import { toaster } from "../ui/toaster";
@@ -20,8 +20,8 @@ const MyChats = ({ fetchAgain }) => {
     useState(false);
   const [loading, setLoading] = useState(false);
 
-  const fetchChats = async () => {
-    if (!user) return;
+  const fetchChats = useCallback(async () => {
+    if (!user?.token) return;
 
     try {
       setLoading(true);
@@ -43,7 +43,7 @@ const MyChats = ({ fetchAgain }) => {
       });
       setLoading(false);
     }
-  };
+  }, [user?.token, setChats]);
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -53,8 +53,7 @@ const MyChats = ({ fetchAgain }) => {
     if (userInfo && user) {
       fetchChats();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchAgain, user]);
+  }, [fetchAgain, user, fetchChats]);
 
   // Socket event listeners for real-time updates
   useEffect(() => {
@@ -65,7 +64,7 @@ const MyChats = ({ fetchAgain }) => {
 
     const handleGroupCreated = (groupData) => {
       // Check if current user is part of the group
-      const isUserInGroup = groupData.users.some(u => u._id === user._id);
+      const isUserInGroup = groupData.users.some((u) => u._id === user._id);
       if (isUserInGroup) {
         fetchChats(); // Refresh chat list
       }
@@ -74,9 +73,9 @@ const MyChats = ({ fetchAgain }) => {
     const handleMemberAdded = (data) => {
       const { chat, addedUser } = data;
       // Check if current user is part of the group or is the added user
-      const isUserInGroup = chat.users.some(u => u._id === user._id);
+      const isUserInGroup = chat.users.some((u) => u._id === user._id);
       const isCurrentUserAdded = addedUser._id === user._id;
-      
+
       if (isUserInGroup || isCurrentUserAdded) {
         fetchChats(); // Refresh chat list
       }
@@ -85,9 +84,9 @@ const MyChats = ({ fetchAgain }) => {
     const handleMemberRemoved = (data) => {
       const { chat, removedUser } = data;
       // Check if current user is part of the group or is the removed user
-      const isUserInGroup = chat.users.some(u => u._id === user._id);
+      const isUserInGroup = chat.users.some((u) => u._id === user._id);
       const isCurrentUserRemoved = removedUser._id === user._id;
-      
+
       if (isUserInGroup || isCurrentUserRemoved) {
         fetchChats(); // Refresh chat list
       }
@@ -96,7 +95,7 @@ const MyChats = ({ fetchAgain }) => {
     const handleGroupDeleted = (data) => {
       const { chat } = data;
       // Check if current user was part of the deleted group
-      const wasUserInGroup = chat.users.some(u => u._id === user._id);
+      const wasUserInGroup = chat.users.some((u) => u._id === user._id);
       if (wasUserInGroup) {
         fetchChats(); // Refresh chat list
       }
@@ -105,7 +104,7 @@ const MyChats = ({ fetchAgain }) => {
     const handleGroupRenamed = (data) => {
       const { chat } = data;
       // Check if current user is part of the group
-      const isUserInGroup = chat.users.some(u => u._id === user._id);
+      const isUserInGroup = chat.users.some((u) => u._id === user._id);
       if (isUserInGroup) {
         fetchChats(); // Refresh chat list
       }

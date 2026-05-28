@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Field,
   Fieldset,
@@ -28,21 +28,7 @@ const CreateGroupChatDialogBox = ({ isOpen, onClose }) => {
   const dialogOpen = isOpen !== undefined ? isOpen : openDialog;
   const handleClose = onClose || (() => setOpenDialog(false));
 
-  // Debounced search effect - automatically searches when search state changes
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (search.trim()) {
-        handleSearch();
-      } else {
-        // Clear search results when search is empty (handles backspace to empty state)
-        setSearchResult([]);
-      }
-    }, 300); // 300ms delay
-
-    return () => clearTimeout(timeoutId);
-  }, [search, user]);
-
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     if (!search.trim()) {
       setSearchResult([]);
       return;
@@ -68,7 +54,21 @@ const CreateGroupChatDialogBox = ({ isOpen, onClose }) => {
       });
       setLoading(false);
     }
-  };
+  }, [search, user]);
+
+  // Debounced search effect - automatically searches when search state changes
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (search.trim()) {
+        handleSearch();
+      } else {
+        // Clear search results when search is empty (handles backspace to empty state)
+        setSearchResult([]);
+      }
+    }, 300); // 300ms delay
+
+    return () => clearTimeout(timeoutId);
+  }, [search, handleSearch]);
 
   const handleSubmit = async () => {
     if (!groupChatName || !selectedUsers) {
@@ -92,7 +92,7 @@ const CreateGroupChatDialogBox = ({ isOpen, onClose }) => {
           name: groupChatName,
           users: JSON.stringify(selectedUsers.map((u) => u._id)),
         },
-        config
+        config,
       );
 
       setChats([data, ...chats]);
