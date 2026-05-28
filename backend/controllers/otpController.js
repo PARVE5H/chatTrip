@@ -142,11 +142,11 @@ const sendOTPEmail = async (email, otp, name) => {
               >chattrip.management@gmail.com</a
             >.
           </p>
-          <p style="color: #5e5e5e; font-size: 8px">
+          <p style="color: #5e5e5e; font-size: 12px">
             Experience seamless, lightning-fast messaging with ChatTrip. Built
             for simplicity, speed, and connection—whether it's one-on-one or a
             group chat, your words arrive the moment you send them. Proudly made
-            in BARWALA with ❤️ by
+            in INDIA with ❤️ by
             <b>
               <a
                 style="color: #000; text-decoration: none"
@@ -252,7 +252,7 @@ const verifyOTPAndRegister = expressAsyncHandler(async (req, res) => {
 
     res.status(400);
     throw new Error(
-      `Invalid OTP. ${5 - otpRecord.attempts} attempts remaining.`
+      `Invalid OTP. ${5 - otpRecord.attempts} attempts remaining.`,
     );
   }
 
@@ -313,7 +313,7 @@ const resendOTP = expressAsyncHandler(async (req, res) => {
   if (!otpRecord) {
     res.status(400);
     throw new Error(
-      "No pending verification found. Please start registration again."
+      "No pending verification found. Please start registration again.",
     );
   }
 
