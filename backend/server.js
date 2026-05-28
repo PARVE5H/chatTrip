@@ -29,7 +29,7 @@ app.use(
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  }),
 );
 
 // Body parsing middleware
@@ -43,7 +43,7 @@ app.use((req, res, next) => {
   res.header("X-XSS-Protection", "1; mode=block");
   res.header(
     "Strict-Transport-Security",
-    "max-age=31536000; includeSubDomains"
+    "max-age=31536000; includeSubDomains",
   );
   next();
 });
@@ -57,9 +57,9 @@ app.use("/api/otp", otpRoutes);
 
 // Keep-alive route for Render free tier
 app.get("/api/keep-alive", (req, res) => {
-  res.status(200).json({ 
-    message: "Server is alive", 
-    timestamp: new Date().toISOString() 
+  res.status(200).json({
+    message: "Server is alive",
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -68,7 +68,7 @@ app.get("/api/keep-alive", (req, res) => {
 const __dirname1 = path.resolve();
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname1, "/frontend/build")));
-  
+
   // Handle React routing, return all requests to React app
   app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"));
@@ -95,7 +95,7 @@ if (process.env.NODE_ENV === "production") {
 const io = new Server(server, {
   pingTimeout: 60000,
   pingInterval: 25000,
-  transports: ['websocket', 'polling'],
+  transports: ["websocket", "polling"],
   allowEIO3: true,
   connectTimeout: 45000,
   // Optimize for Render's limitations
@@ -103,12 +103,13 @@ const io = new Server(server, {
   maxHttpBufferSize: 1e6,
   // CORS for static binding (same domain)
   cors: {
-    origin: process.env.NODE_ENV === "production" 
-      ? true // Allow same-origin requests
-      : "http://localhost:3000",
+    origin:
+      process.env.NODE_ENV === "production"
+        ? true // Allow same-origin requests
+        : "http://localhost:3000",
     methods: ["GET", "POST"],
-    credentials: true
-  }
+    credentials: true,
+  },
 });
 
 // Track which users are in which chat rooms
@@ -234,10 +235,5 @@ io.on("connection", (socket) => {
     if (socket.userId) {
       userActiveChatRooms.delete(socket.userId);
     }
-  });
-
-  socket.off("setup", () => {
-    console.log("USER DISCONNECTED");
-    socket.leave(userData._id);
   });
 });
